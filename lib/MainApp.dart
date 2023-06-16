@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:untitled1/Pages/Home/HomePage.dart';
-import 'package:untitled1/bloc/PagesBloc.dart';
-import 'package:untitled1/bloc/PagesStates.dart';
+import 'package:untitled1/bloc/PagesBloc/PagesBloc.dart';
+import 'package:untitled1/bloc/PagesBloc/PagesStates.dart';
 
 
 
@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
                 case (StateHome()):
                   return const HomePage();
                 case (StateSearch()):
-                  return Material();
+                  return const Material();
               }
             }
         ),
