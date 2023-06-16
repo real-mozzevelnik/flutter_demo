@@ -39,7 +39,7 @@ dependencies:
   url_launcher: ^6.0.0
   flutter_bloc: ^8.0.0
   dio: ^5.2.1
-
+  html: ^0.15.0
 
 dev_dependencies:
   flutter_test:

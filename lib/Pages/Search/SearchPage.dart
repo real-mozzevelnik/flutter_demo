@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:untitled1/bloc/SearchBloc/search_bloc.dart';
+import 'package:untitled1/Parser/parser.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -21,6 +23,7 @@ class SearchPage extends StatelessWidget {
                 onChanged: (input) {
                   context.read<SearchBloc>().add(SearchLoadingEvent(
                       text: input));
+                  Parser.getData();
                 },
                 hintStyle: MaterialStateProperty.resolveWith((states) =>
                 const TextStyle(
@@ -33,7 +36,7 @@ class SearchPage extends StatelessWidget {
               ),
               BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
-                    if (state is SearchEmptyState) {
+                    if (state is SearchEmptyState || state.searchText == "") {
                       return Container(
                           height: 500.0,
                           child: const Center(
@@ -49,8 +52,13 @@ class SearchPage extends StatelessWidget {
                       );
                     }
                     else if (state is SearchLoadingState) {
-                      return const CircularProgressIndicator(
-                        color: Colors.deepPurple,
+                      return Container(
+                          height: 500.0,
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.deepPurple,
+                            ),
+                          )
                       );
                     }
                     return const Material();
