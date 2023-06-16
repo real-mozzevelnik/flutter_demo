@@ -24,18 +24,25 @@ class MainApp extends StatelessWidget {
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: const Center(
-              child: Text(
-                "Home",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold
-                ),
-              ),
+            title: Center(
+                child: BlocBuilder<PagesBloc, PagesState>(
+                    builder: (context, state) {
+                      return Text(
+                          PagesTitles[state.page]!,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold
+                          )
+                      );
+                    }
+                )
             ),
           ),
-          bottomNavigationBar: BlocBuilder<NavigationBarBloc, NavigationBarState>(
+          bottomNavigationBar: BlocBuilder<NavigationBarBloc,
+              NavigationBarState>(
             builder: (context, state) {
-              return state is NavigationBarActiveState ? const NavigationBarMenu() : Container();
+              return state is NavigationBarActiveState
+                  ? const NavigationBarMenu()
+                  : Container();
             },
           ),
           body: BlocBuilder<PagesBloc, PagesState>(
