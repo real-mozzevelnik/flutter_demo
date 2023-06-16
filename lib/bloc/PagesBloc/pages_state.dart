@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 enum Pages {
   HOME_PAGE,
   SEARCH_PAGE
