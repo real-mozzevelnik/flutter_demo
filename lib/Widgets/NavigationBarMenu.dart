@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:untitled1/bloc/PagesBloc/PagesEvents.dart';
-import 'package:untitled1/bloc/PagesBloc/PagesBloc.dart';
-import 'package:untitled1/bloc/PagesBloc/PagesStates.dart';
+import 'package:untitled1/bloc/PagesBloc/pages_event.dart';
+import 'package:untitled1/bloc/PagesBloc/pages_bloc.dart';
+import 'package:untitled1/bloc/PagesBloc/pages_state.dart';
 
 class NavigationBarMenu extends StatefulWidget {
   const NavigationBarMenu({super.key});
@@ -13,10 +13,12 @@ class NavigationBarMenu extends StatefulWidget {
 }
 
 class NavigationBarMenuState extends State<NavigationBarMenu> {
+  int cur_index = 0;
 
-  final List<PagesEvent> _events = [EventHome(), EventSearch()];
+  final _events = <PagesEvent>[EventHome(), EventSearch()];
 
   void onTap(index) {
+    cur_index = index;
     context.read<PagesBloc>().add(_events[index]);
   }
 
@@ -48,7 +50,7 @@ class NavigationBarMenuState extends State<NavigationBarMenu> {
               )
             ],
             onTap: onTap,
-
+            currentIndex: cur_index,
           );
 
         }

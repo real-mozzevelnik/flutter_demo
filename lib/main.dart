@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled1/bloc/PagesBloc/PagesBloc.dart';
+import 'package:untitled1/bloc/NavigationBarBloc/navigation_bar_bloc.dart';
+import 'package:untitled1/bloc/PagesBloc/pages_bloc.dart';
 
 import 'package:untitled1/MainApp.dart';
 
 void main() => runApp(
-  BlocProvider(
-      create: (context) => PagesBloc(),
+  MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) => PagesBloc(),
+        ),
+        BlocProvider(
+            create: (BuildContext context) => NavigationBarBloc()
+        )
+      ],
       child: const MainApp()
   )
 );

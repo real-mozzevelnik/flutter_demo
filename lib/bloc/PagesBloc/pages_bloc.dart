@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:untitled1/bloc/PagesBloc/PagesEvents.dart';
-import 'package:untitled1/bloc/PagesBloc/PagesStates.dart';
+import 'package:untitled1/bloc/PagesBloc/pages_event.dart';
+import 'package:untitled1/bloc/PagesBloc/pages_state.dart';
 
 class PagesBloc extends Bloc<PagesEvent, PagesState> {
   PagesBloc() : super(StateHome()) {

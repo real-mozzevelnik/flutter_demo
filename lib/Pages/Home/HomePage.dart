@@ -2,26 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:untitled1/Widgets/InfoText.dart';
 import 'package:untitled1/Widgets/HomeMenuList.dart';
-import 'package:untitled1/Widgets/NavigationBarMenu.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            "Home",
-            style: TextStyle(
-                fontWeight: FontWeight.bold
-            ),
-          ),
-        ),
-      ),
-      bottomNavigationBar: const NavigationBarMenu(),
-      body: const Material(
+    return const Material(
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -56,8 +43,7 @@ class HomePage extends StatelessWidget {
                 HomeMenuList()
               ]
           ),
-        ),
-      ),
+        )
     );
   }
 }
