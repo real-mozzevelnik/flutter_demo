@@ -33,36 +33,33 @@ class SearchPage extends StatelessWidget {
                 const TextStyle(
                     color: Colors.white
                 )),
-              ),
-              BlocBuilder<SearchBloc, SearchState>(
-                  builder: (context, state) {
-                    if (state is SearchEmptyState || state.searchText == "") {
-                      return Container(
-                          height: 500.0,
-                          child: const Center(
-                            child: Text(
-                              "Searching results will appear here...",
-                              style: TextStyle(
-                                  color: Colors.white30,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20
-                              ),
-                            ),
+              ), Expanded(
+                  child: Container(
+                      height: double.maxFinite,
+                      child: Center(
+                          child: BlocBuilder<SearchBloc, SearchState>(
+                              builder: (context, state) {
+                                if (state is SearchEmptyState ||
+                                    state.searchText == "") {
+                                  return const Text(
+                                      "Searching results will appear here...",
+                                      style: TextStyle(
+                                          color: Colors.white30,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20
+                                      )
+                                  );
+                                }
+                                else if (state is SearchLoadingState) {
+                                  return const CircularProgressIndicator(
+                                    color: Colors.deepPurple,
+                                  );
+                                }
+                                return const Material();
+                              }
                           )
-                      );
-                    }
-                    else if (state is SearchLoadingState) {
-                      return Container(
-                          height: 500.0,
-                          child: const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.deepPurple,
-                            ),
-                          )
-                      );
-                    }
-                    return const Material();
-                  }
+                      )
+                  )
               )
             ],
           )
