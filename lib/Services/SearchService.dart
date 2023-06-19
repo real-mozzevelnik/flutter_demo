@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 class SearchService {
 
   static final _dio = Dio();
-  static String _url = "https://www.google.com/search?&hl=EN&tbm=isch&q=";
+  static const String _url = "https://www.google.com/search?&hl=EN&tbm=isch&q=";
 
   static Future<List<String>> getData(String input) async {
-    _url += input;
 
     List<String> urlList = [];
     final response = await _dio.get(
-        _url,
+        _url + input,
         options: Options(
             headers: {"Accept": "application/json"}
         )
@@ -21,7 +20,11 @@ class SearchService {
     var doc = parse(response.data);
 
     final tags = [];
-    tags.addAll(doc.getElementsByTagName("img").map((e) => e.outerHtml));
+    tags.addAll(doc
+        .getElementsByTagName("img")
+        .map((e) => e.outerHtml)
+    );
+
     RegExp exp = RegExp(r"https://\S+");
     for (int i = 0; i < tags.length; i++) {
       final match = exp.firstMatch(tags[i]);

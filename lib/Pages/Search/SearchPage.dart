@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 import 'package:untitled1/bloc/SearchBloc/search_bloc.dart';
 
@@ -70,22 +72,66 @@ class SearchPage extends StatelessWidget {
                                       itemBuilder: (BuildContext context,
                                           index) {
                                         return Card(
-                                          // shape: ShapeBorder.lerp(0.5, 0.6, 0.6),
-                                            margin: const EdgeInsets.all(30.0),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Image.network(
-                                                    state.img_urls[index])
-                                              ],
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius
+                                                    .circular(50.0)
+                                            ),
+                                            margin: const EdgeInsets.all(
+                                                30.0),
+                                            child: Container(
+                                                padding: const EdgeInsets
+                                                    .all(
+                                                    15.0),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    ClipRRect(
+                                                        borderRadius: BorderRadius
+                                                            .circular(50.0),
+                                                        child: SizedBox
+                                                            .fromSize(
+                                                            size: const Size
+                                                                .fromRadius(
+                                                                180.0),
+                                                            child: Image
+                                                                .network(
+                                                              state
+                                                                  .img_urls[index],
+                                                              fit: BoxFit
+                                                                  .fill,
+                                                              filterQuality: FilterQuality
+                                                                  .high,
+                                                              // centerSlice: Rect.fromCircle(center: Offset.infinite, radius: 1.0),
+                                                            )
+                                                        )
+                                                    ),
+                                                    const Spacer(),
+                                                    Animate(
+                                                      effects: [
+                                                        FadeEffect(
+                                                            delay: 600.ms
+                                                        ),
+                                                      ],
+                                                      child: IconButton(
+                                                          onPressed: () {
+                                                            GallerySaver
+                                                                .saveImage(
+                                                                'https://picsum.photos/250?image=9');
+                                                            print(state
+                                                                .img_urls[index]);
+                                                          },
+                                                          icon: const Icon(
+                                                              Icons.download
+                                                          )
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
                                             )
                                         );
                                       }
                                   );
                                 };
-                                return SearchBar(
-                                  backgroundColor: MaterialStateProperty.resolveWith<Color?>((states) => Colors.redAccent),
-                                );
-                                return const Material();
+                                return Container();
                               }
                           )
                       )
@@ -97,4 +143,3 @@ class SearchPage extends StatelessWidget {
     );
   }
 }
-
