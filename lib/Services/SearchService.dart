@@ -2,19 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:html/parser.dart';
 import 'package:flutter/material.dart';
 
-class Parser {
+class SearchService {
 
-  static void getData() async {
-    
-    final dio = Dio();
-    String url = "https://www.google.com/search?&hl=EN&tbm=isch&q=hello";
+  static final _dio = Dio();
+  static String _url = "https://www.google.com/search?&hl=EN&tbm=isch&q=";
 
-    List<String> url_list = [];
-    final response = await dio.get(
-        url,
+  static Future<List<String>> getData(String input) async {
+    _url += input;
+
+    List<String> urlList = [];
+    final response = await _dio.get(
+        _url,
         options: Options(
-        headers: {"Accept":"application/json"}
-      )
+            headers: {"Accept": "application/json"}
+        )
     );
 
     var doc = parse(response.data);
@@ -25,12 +26,11 @@ class Parser {
     for (int i = 0; i < tags.length; i++) {
       final match = exp.firstMatch(tags[i]);
       if (match != null) {
-        url_list.add(match[0]!.split("\"")[0]);
+        urlList.add(match[0]!.split("\"")[0]);
       }
     }
 
-    print(url_list);
-
+    return urlList;
   }
 }
 

@@ -2,13 +2,16 @@ part of 'search_bloc.dart';
 
 class SearchState {
   String searchText = "";
+  List<String> img_urls = [];
 }
 
-class SearchSearchingState extends SearchState {
-  SearchSearchingState({
-    required String text
+class SearchLoadedState extends SearchState {
+  SearchLoadedState({
+    required String text,
+    required List<String> img_urls
   }) {
     super.searchText = text;
+    super.img_urls = img_urls;
   }
 }
 

@@ -4,8 +4,8 @@ class SearchEvent {
   String searchText = "";
 }
 
-class SearchSearchingEvent extends SearchEvent {
-  SearchSearchingEvent({
+class SearchLoadedEvent extends SearchEvent {
+  SearchLoadedEvent({
     required String text
   }) {
     super.searchText = text;
