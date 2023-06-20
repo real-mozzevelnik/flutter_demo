@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery_saver/gallery_saver.dart';
-
+import 'package:untitled1/Services/SearchService.dart';
 import 'package:untitled1/bloc/SearchBloc/search_bloc.dart';
 
 
@@ -100,7 +99,6 @@ class SearchPage extends StatelessWidget {
                                                                   .fill,
                                                               filterQuality: FilterQuality
                                                                   .high,
-                                                              // centerSlice: Rect.fromCircle(center: Offset.infinite, radius: 1.0),
                                                             )
                                                         )
                                                     ),
@@ -113,11 +111,7 @@ class SearchPage extends StatelessWidget {
                                                       ],
                                                       child: IconButton(
                                                           onPressed: () {
-                                                            GallerySaver
-                                                                .saveImage(
-                                                                'https://picsum.photos/250?image=9');
-                                                            print(state
-                                                                .img_urls[index]);
+                                                            SearchService.saveImage(state.img_urls[index]);
                                                           },
                                                           icon: const Icon(
                                                               Icons.download
